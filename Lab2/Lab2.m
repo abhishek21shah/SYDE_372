@@ -104,9 +104,13 @@ title('Non Parametric - Parzen for Data Set B')
 legend('True p(x)','Parzen with std dev = 0.1', 'Parzen with std dev = 0.4')
 
 %% Section 3: Model Estimation - 2D Case
+% Load in data from 2nd workspace
 load('lab2_2.mat');
+
 %Section 3.1: Parametric
 
 %Section 3.2: 
+
 %% Section 4: Sequential Determinants
+% Load in data from 3rd workspace
 load('lab2_3.mat'); % 
