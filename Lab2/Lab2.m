@@ -9,13 +9,15 @@ data_b = data1.b;
 m_a = 5;
 v_a = 1; % We are given std dev is 1, but std_dev^2 = var and 1^2 = 1 
 l_b = 1;
-xA = linspace(min(data_a),max(data_a),length(data_a)); %generates 100 evenly spaced points from min to max of data_a
+xA = linspace(min(data_a),max(data_a),length(data_a)); % generates 100 evenly spaced points from min to max of data_a
 xB = linspace(min(data_b),max(data_b),length(data_b));
+
+% True densities for each data set
+pdf_True_a = OneD_NormalDist(m_a, v_a, xA);
+pdf_True_b = OneD_ExponenDist(l_b, xB);
 
 % Section 2.1: Parametric - Gaussian
 [mean_a, mean_b, var_a, var_b] = OneD_paraGaus(data1);
-pdf_True_a = OneD_NormalDist(m_a, v_a, xA);
-pdf_True_b = OneD_ExponenDist(l_b, xB);
 % Data Set A
 pdf_Gaus_a = OneD_NormalDist(mean_a, var_a, xA);
 figure(1);
@@ -86,31 +88,38 @@ figure(7);
 plot(xA, pdf_True_a, 'b');
 hold on;
 plot(xA, parzen_a_sd1, 'black');
+title('Non Parametric - Parzen for Data Set A with std dev = 0.1')
+legend('True p(x)','Parzen with std dev = 0.1')
+hold off;
+figure(8);
+plot(xA, pdf_True_a, 'b');
 hold on;
 plot(xA, parzen_a_sd2, 'red');
-title('Non Parametric - Parzen for Data Set A')
-legend('True p(x)','Parzen with std dev = 0.1', 'Parzen with std dev = 0.4')
+title('Non Parametric - Parzen for Data Set A with std dev = 0.4')
+legend('True p(x)','Parzen with std dev = 0.4')
 
 % Data Set B
 parzen_b_sd1 = OneD_ParzenWindowEst(std_dev1, data_b, xB);
 parzen_b_sd2 = OneD_ParzenWindowEst(std_dev2, data_b, xB);
-figure(8);
+figure(9);
 plot(xB, pdf_True_b, 'b');
 hold on;
 plot(xB, parzen_b_sd1, 'black');
+title('Non Parametric - Parzen for Data Set B with std dev = 0.1')
+legend('True p(x)','Parzen with std dev = 0.1')
+hold off;
+figure(10);
+plot(xB, pdf_True_b, 'b');
 hold on;
 plot(xB, parzen_b_sd2, 'red');
-title('Non Parametric - Parzen for Data Set B')
-legend('True p(x)','Parzen with std dev = 0.1', 'Parzen with std dev = 0.4')
+title('Non Parametric - Parzen for Data Set B with std dev = 0.4')
+legend('True p(x)','Parzen with std dev = 0.4')
 
 %% Section 3: Model Estimation - 2D Case
-% Load in data from 2nd workspace
 load('lab2_2.mat');
+%Section 3.1: Parametric Estimation
 
-%Section 3.1: Parametric
-
-%Section 3.2: 
+%Section 3.2: Non-Parametric Estimation
 
 %% Section 4: Sequential Determinants
-% Load in data from 3rd workspace
 load('lab2_3.mat'); % 
