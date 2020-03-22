@@ -122,4 +122,4 @@ load('lab2_2.mat');
 %Section 3.2: Non-Parametric Estimation
 
 %% Section 4: Sequential Determinants
-load('lab2_3.mat'); % 
+load('lab2_3.mat');
