@@ -123,3 +123,15 @@ load('lab2_2.mat');
 
 %% Section 4: Sequential Determinants
 load('lab2_3.mat');
+
+% Mesh grid for MED Classification
+x1 = linspace(min([a(:,1);b(:,1)]), max([a(:,1);b(:,1)]), 100);
+y1 = linspace(min([a(:,2);b(:,2)]), max([a(:,2);b(:,2)]), 100);
+
+% Learn 3 sequential classifiers
+sequential_classification(x1,y1,a,b,1,1);
+sequential_classification(x1,y1,a,b,1,2);
+sequential_classification(x1,y1,a,b,1,3);
+
+% J = 5 with 20 iterations
+sequential_classification(x1,y1,a,b,5,0);
