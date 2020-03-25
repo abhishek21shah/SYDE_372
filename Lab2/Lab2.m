@@ -194,7 +194,7 @@ window = reshape(window,length(Y1),length(X1));
 ML_boundary = zeros(r, c);
 for i = 1:r
    for j = 1:c
-       [max_p, class] = max([pdf_a(i,j), pdf_b(i,j), pdf_c(i,j)]);
+       [max_prob, class] = max([pdf_a(i,j), pdf_b(i,j), pdf_c(i,j)]);
        ML_boundary(i,j) = class;
    end
 end
