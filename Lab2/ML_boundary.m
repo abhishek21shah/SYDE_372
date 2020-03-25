@@ -1,4 +1,4 @@
-function [ boundary ] = ML_classifier(mean_1, mean_2, covar_1,covar_2, X1, X2)
+function [ boundary ] = ML_boundary(mean_1, mean_2, covar_1,covar_2, X1, X2)
 [r, c] = size(X1); 
 boundary = zeros(r, c);
 for i = 1:r
