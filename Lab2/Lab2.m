@@ -171,16 +171,16 @@ window = reshape(window,length(Y1),length(X1));
 
 [X2,Y2] = meshgrid(x_a, y_a);
 [r, c] = size(X2);
-ML_classifier = zeros(r, c);
+ML_boundary = zeros(r, c);
 for i = 1:r
    for j = 1:c
        [max_p, class] = max([pdf_a(i,j), pdf_b(i,j), pdf_c(i,j)]);
-       ML_classifier(i,j) = class;
+       ML_boundary(i,j) = class;
    end
 end
 
 %plot non parametric estimation 
-parametric_2d_plot(at, bt, ct, X2, Y2, ML_classifier) 
+parametric_2d_plot(at, bt, ct, X2, Y2, ML_boundary) 
 
 
 %% Section 4: Sequential Determinants
