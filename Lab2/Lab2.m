@@ -171,7 +171,7 @@ Plot_Param_2d(x1, y1, Plot, at, bt, ct);
 % Section 3.2: Non-Parametric Estimation
 % Gaussian window, variance of 400
 k = 400;
-mean = [k/2 k/2];
+mean = [200 200];
 covar = [400 0; 0 400];
 step = 1;
 
