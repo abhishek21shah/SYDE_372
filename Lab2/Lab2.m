@@ -116,10 +116,45 @@ title('Non Parametric - Parzen for Data Set B with std dev = 0.4')
 legend('True p(x)','Parzen with std dev = 0.4')
 
 %% Section 3: Model Estimation - 2D Case
+clear all; %may need to remove this 
+close all; %ditto
 load('lab2_2.mat');
 %Section 3.1: Parametric Estimation
 
 %Section 3.2: Non-Parametric Estimation
+%Gaussian window, variance of 400
+k = 400;
+mean = [k/2 k/2];
+covar = [400 0; 0 400];
+step = 1;
+
+min_x = min([min(al(:,1)), min(bl(:,1)), min(cl(:,1))]);
+min_y = min([min(al(:,2)), min(bl(:,2)), min(cl(:,2))]);
+max_x = max([max(al(:,1)), max(bl(:,1)), max(cl(:,1))]);
+max_y = max([max(al(:,2)), max(bl(:,2)), max(cl(:,2))]);
+res = [step min_x min_y max_x max_y];
+
+[X1,Y1] = meshgrid(1:step:k);
+window = mvnpdf([X1(:) Y1(:)], mean, covar);
+window = reshape(window,length(Y1),length(X1));
+
+[pdf_a, x_a, y_a] = parzen2(al,res, window);
+[pdf_b, x_b, y_b] = parzen2(bl,res, window);
+[pdf_c, x_c, y_c] = parzen2(cl,res, window);
+
+[X2,Y2] = meshgrid(x_a, y_a);
+[r, c] = size(X2);
+ML_classifier = zeros(r, c);
+for i = 1:r
+   for j = 1:c
+       [max_p, class] = max([pdf_a(i,j), pdf_b(i,j), pdf_c(i,j)]);
+       ML_classifier(i,j) = class;
+   end
+end
+
+%plot non parametric estimation 
+parametric_2d_plot(at, bt, ct, X2, Y2, ML_classifier) 
+
 
 %% Section 4: Sequential Determinants
 load('lab2_3.mat');
