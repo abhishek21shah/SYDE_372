@@ -26,6 +26,8 @@ hold on;
 plot(xA, pdf_Gaus_a, 'black');
 title('1D Parametric - Gaussian for Data Set A')
 legend('True p(x)','Estimated p(x)')
+xlabel('x');
+ylabel('Density');
 
 % Data Set B
 pdf_Gaus_b = OneD_NormalDist(mean_b, var_b, xB);
@@ -35,6 +37,8 @@ hold on;
 plot(xB, pdf_Gaus_b, 'black');
 title('1D Parametric - Gaussian for Data Set B')
 legend('True p(x)','Estimated p(x)')
+xlabel('x');
+ylabel('Density');
 
 % Section 2.2: Parametric - Exponential
 % Data Set A
@@ -46,6 +50,8 @@ hold on;
 plot(xA, pdf_Exp_a, 'black');
 title('1D Parametric - Exponential for Data Set A')
 legend('True p(x)','Estimated p(x)')
+xlabel('x');
+ylabel('Density');
 
 % Data Set B
 lambda_b = OneD_calcLambda(data_b);
@@ -56,6 +62,8 @@ hold on;
 plot(xB, pdf_Exp_b, 'black');
 title('1D Parametric - Exponential for Data Set B')
 legend('True p(x)','Estimated p(x)')
+xlabel('x');
+ylabel('Density');
 
 % Section 2.3: Parametric - Uniform
 % Data Set A
@@ -67,6 +75,8 @@ hold on;
 plot(xA, pdf_Uni_a, 'black');
 title('1D Parametric - Uniform for Data Set A')
 legend('True p(x)','Estimated p(x)')
+xlabel('x');
+ylabel('Density');
 
 % Data Set B
 [min_b, max_b] = OneD_uniParam(xB);
@@ -77,6 +87,8 @@ hold on;
 plot(xB, pdf_Uni_b, 'black');
 title('1D Parametric - Uniform for Data Set B')
 legend('True p(x)','Estimated p(x)')
+xlabel('x');
+ylabel('Density');
 
 % Section 2.4: Non-parametric
 std_dev1 = 0.1;
@@ -90,6 +102,9 @@ hold on;
 plot(xA, parzen_a_sd1, 'black');
 title('Non Parametric - Parzen for Data Set A with std dev = 0.1')
 legend('True p(x)','Parzen with std dev = 0.1')
+xlabel('x');
+ylabel('Density');
+
 hold off;
 figure(8);
 plot(xA, pdf_True_a, 'b');
@@ -97,6 +112,8 @@ hold on;
 plot(xA, parzen_a_sd2, 'red');
 title('Non Parametric - Parzen for Data Set A with std dev = 0.4')
 legend('True p(x)','Parzen with std dev = 0.4')
+xlabel('x');
+ylabel('Density');
 
 % Data Set B
 parzen_b_sd1 = OneD_ParzenWindowEst(std_dev1, data_b, xB);
@@ -107,6 +124,9 @@ hold on;
 plot(xB, parzen_b_sd1, 'black');
 title('Non Parametric - Parzen for Data Set B with std dev = 0.1')
 legend('True p(x)','Parzen with std dev = 0.1')
+xlabel('x');
+ylabel('Density');
+
 hold off;
 figure(10);
 plot(xB, pdf_True_b, 'b');
@@ -114,14 +134,14 @@ hold on;
 plot(xB, parzen_b_sd2, 'red');
 title('Non Parametric - Parzen for Data Set B with std dev = 0.4')
 legend('True p(x)','Parzen with std dev = 0.4')
+xlabel('x');
+ylabel('Density');
 
 %% Section 3: Model Estimation - 2D Case
-clear all; %may need to remove this 
-close all; %ditto
 load('lab2_2.mat');
 
-%Section 3.1: Parametric Estimation
-%Find mean and Covariances of each class 
+% Section 3.1: Parametric Estimation
+% Find mean and Covariances of each class 
 meanA= meanCalc(al); 
 meanB= meanCalc(bl); 
 meanC= meanCalc(cl); 
@@ -129,7 +149,7 @@ covA= covCalc(al);
 covB= covCalc(bl);
 covC= covCalc(cl);
 
-%Create meshgrid 
+% Create meshgrid 
 minX= min([al(:,1);bl(:,1);cl(:,1)])-1; 
 maxX= max([al(:,1);bl(:,1);cl(:,1)])+1;
 minY= min([al(:,2);bl(:,2);cl(:,2)])-1;
@@ -139,17 +159,17 @@ x= minX:1:maxX;
 y= minY:1:maxY; 
 [x1,y1]= meshgrid(x,y); 
 
-%Get components of graph 
+% Get components of graph 
 ML_ab= getMap(covA,covB,meanA',meanB',x1,y1); 
 ML_ac= getMap(covA,covC,meanA',meanC',x1,y1); 
 ML_bc= getMap(covB,covC,meanB',meanC',x1,y1); 
 
-%Plot the results
+% Plot the results
 Plot = ML_Classification(x1,y1,ML_ab,ML_ac,ML_bc);
 Plot_Param_2d(x1, y1, Plot, at, bt, ct);
 
-%Section 3.2: Non-Parametric Estimation
-%Gaussian window, variance of 400
+% Section 3.2: Non-Parametric Estimation
+% Gaussian window, variance of 400
 k = 400;
 mean = [k/2 k/2];
 covar = [400 0; 0 400];
